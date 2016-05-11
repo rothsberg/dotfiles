@@ -1,0 +1,52 @@
+[alias]
+	aa = add --all
+	ac = "!git aa && git ci"
+	ci = commit -v
+  cd = checkout develop
+  cm = checkout master
+	dc = diff --cached
+	st = status
+	ap = add --patch
+	ss = "stash save -u"
+	alias = "!git config -l | grep alias | cut -c 7-"
+	l = "!git log-hist"
+	log-hist = "!git log-pretty --graph"
+	log-pretty = "log --pretty='format:%C(blue)%h%C(red)%d%C(yellow) %s %C(green)%an%Creset, %ar'"
+	bbp = "!gem bump && git bp"
+	bp = "!rvm . do rake build && NEW=$(ls -t pkg/ | head -1) && rvm . do fury push pkg/$NEW && git frf && git push"
+	ffs = flow feature start
+	fff = !FEATURENAME=$(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'}) && git flow feature finish $FEATURENAME 
+	fhs = flow hotfix start
+	fhf = !HOTFIXNAME=$(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'}) && git flow hotfix finish $HOTFIXNAME 
+	frs = flow release start
+	frf = !RELEASENAME=$(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'}) && git flow release finish $RELEASENAME 
+ 	pr = pull --rebase
+[user]
+	name = Johan Rothsberg
+	email = johan.rothsberg@upptec.se
+[color]
+	ui = auto
+[core]
+	whitespace = trailing-space,space-before-tab
+	excludesfile = /Users/johan/.gitignore_global
+[diff]
+	renames = copies
+	mnemonicprefix = true
+[branch]
+	autosetupmerge = true
+[push]
+	default = tracking
+[rerere]
+	enabled = true
+[merge]
+	stat = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[remote "origin"]
+	push = refs/heads/*:refs/heads/*
+	push = refs/tags/*:refs/tags/*
+
